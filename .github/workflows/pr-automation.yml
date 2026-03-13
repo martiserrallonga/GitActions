@@ -1,0 +1,26 @@
+name: PR Automation
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  automate-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Necessari per llegir fitxers del repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Executa el script de PR
+      - name: Assign author and add Redmine link
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./.github/scripts/pr-automation.js');
+            await script({ github, context });

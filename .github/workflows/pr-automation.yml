@@ -1,0 +1,20 @@
+name: PR automation
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  automate-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run PR script
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const script = fs.readFileSync('./.github/scripts/pr-automation.js', 'utf8');
+            eval(script);

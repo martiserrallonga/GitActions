@@ -19,7 +19,7 @@ module.exports = async ({ github, context }) => {
     const link = `https://redmine.asuni.net/issues/${issueId}`;
 
     if (!body.includes(link)) {
-      body = `${body}\n\n[Redmine ${issueId}](${link})`;
+      body = `${body}\n\n[Redmine #${issueId}](${link})`;
     }
 
     await github.rest.pulls.update({

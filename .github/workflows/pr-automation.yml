@@ -15,12 +15,11 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-      # Necessari per llegir fitxers del repo
+      # Required to read the repo files
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Executa el script de PR
-      - name: Assign author and add Redmine link
+      - name: Trigger all actions defined in the scripts folder
         uses: actions/github-script@v7
         with:
           script: |

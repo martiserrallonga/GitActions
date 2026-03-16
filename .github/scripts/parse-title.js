@@ -25,7 +25,8 @@ module.exports = {
     if (linksToAdd.length === 0)
       return;
 
-    let body = `${pr.body}\n\n${linksToAdd.join("\n")}`;
+    let body = pr.body || "";
+    body = `${body}\n\n${linksToAdd.join("\n")}`;
 
     await github.rest.pulls.update({
       owner: context.repo.owner,

@@ -1,11 +1,3 @@
-// const assignAuthor = require('./assign-author');
-// const addRedmineLink = require('./parse-title');
-
-// module.exports = async ({ github, context }) => {
-//   await assignAuthor({ github, context });
-//   await addRedmineLink({ github, context });
-// };
-
 const fs = require('fs');
 const path = require('path');
 

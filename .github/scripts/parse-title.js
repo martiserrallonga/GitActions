@@ -11,12 +11,13 @@ module.exports = {
     if (matches.length === 0)
       return;
 
+    let body = pr.body || "";
     let linksToAdd = [];
     for (const match of matches) {
       const issueId = match[1];
       const link = `https://redmine.asuni.net/issues/${issueId}`;
 
-      if (pr.body.includes(link))
+      if (body.includes(link))
         continue;
 
       linksToAdd.push(`[Redmine #${issueId}](${link})`);
@@ -25,7 +26,6 @@ module.exports = {
     if (linksToAdd.length === 0)
       return;
 
-    let body = pr.body || "";
     body = `${body}\n\n${linksToAdd.join("\n")}`;
 
     await github.rest.pulls.update({

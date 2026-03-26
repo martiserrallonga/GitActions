@@ -61,7 +61,6 @@ async function generateRedmineLinks(pr, apiKey) {
 
     if (!data.issue) {
       console.warn(`Unexpected response for ${issueId}`);
-      failCount++;
       continue;
     }
 

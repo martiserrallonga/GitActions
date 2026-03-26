@@ -54,8 +54,14 @@ async function generateRedmineLinks(pr, apiKey) {
       continue;
     }
 
+    if (data.error) {
+      console.warn(`Redmine error for ${issueId}: ${data.error}`);
+      continue;
+    }
+
     if (!data.issue) {
-      console.warn(`Invalid Redmine data for issue ${issueId}: missing 'issue' field`);
+      console.warn(`Unexpected response for ${issueId}`);
+      failCount++;
       continue;
     }
 

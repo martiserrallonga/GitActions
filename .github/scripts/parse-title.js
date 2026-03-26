@@ -59,7 +59,7 @@ module.exports = {
         continue;
 
       const tracker = issue.tracker?.name || "Issue";
-      const markdown = `[${tracker} #${issueId}: ${issue.subject}](${link})`;
+      const markdown = `[${tracker} #${issueId}: ${subject}](${link})`;
       linksToAdd.push(markdown);
     }
 

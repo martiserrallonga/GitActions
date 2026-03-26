@@ -1,25 +1,29 @@
-async function getRedmineIssue(issueId, apiKey) {
-  const url = `https://redmine.asuni.net/issues/${issueId}.json`;
-
+async function getRedmineData(issueId, apiKey) {
+  let response;
   try {
-    const response = await fetch(url, {
-      headers: {
-        "X-Redmine-API-Key": apiKey
-      }
+    const url = `https://redmine.asuni.net/issues/${issueId}.json`;
+    response = await fetch(url, {
+      headers: { "X-Redmine-API-Key": apiKey }
     });
-
-    if (!response.ok) {
-      console.warn(`Error fetching issue ${issueId}`);
-      return null;
-    }
-
-    const data = await response.json();
-    return data.issue;
-
   } catch (err) {
-    console.error(`Failed to fetch issue ${issueId}`, err);
+    console.error(`Network error fetching ${issueId}`, err);
     return null;
   }
+
+  if (!response.ok) {
+    console.warn(`Redmine returned ${response.status} for ${issueId}`);
+    return null;
+  }
+
+  let data;
+  try {
+    data = await response.json();
+  } catch (err) {
+    console.error(`Invalid JSON for ${issueId}`, err);
+    return null;
+  }
+
+  return data;
 }
 
 module.exports = {
@@ -27,9 +31,12 @@ module.exports = {
   run: async ({ github, context }) => {
     const pr = context.payload.pull_request;
 
-    if (context.payload.action === "edited" &&
-        !context.payload.changes?.title)
+    if (context.payload.action === "edited" && 
+      !context.payload.changes?.title)
+    {
+      console.log("Title has not changed. Exiting");
       return;
+    }
 
     const matches = [...pr.title.matchAll(/\[(\d+)\]/g)];
     if (matches.length === 0)
@@ -42,19 +49,17 @@ module.exports = {
 
     for (const match of matches) {  
       const issueId = match[1];
-      const issue = await getRedmineIssue(issueId, process.env.REDMINE_API_KEY);
-
-      if (!issue)
-        continue;
-
+      
       const link = `https://redmine.asuni.net/issues/${issueId}`;
-      const title = issue.subject;
-
-      const markdown = `[${title}](${link})`;
-
       if (body.includes(link))
         continue;
 
+      const issue = await getRedmineData(issueId, process.env.REDMINE_API_KEY);
+      if (!issue)
+        continue;
+
+      const tracker = issue.tracker?.name || "Issue";
+      const markdown = `[${tracker} #${issueId}: ${issue.subject}](${link})`;
       linksToAdd.push(markdown);
     }
 

@@ -27,7 +27,7 @@ async function getRedmineData(issueId, apiKey) {
 }
 
 module.exports = {
-  events: ["opened", "edited", "synchronize"],
+  events: ["opened", "edited"],
   run: async ({ github, context }) => {
     const pr = context.payload.pull_request;
 

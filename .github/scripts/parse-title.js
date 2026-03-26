@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 async function getRedmineIssue(issueId, apiKey) {
   const url = `https://redmine.asuni.net/issues/${issueId}.json`;
 
@@ -42,7 +40,7 @@ module.exports = {
 
     console.log("API KEY exists:", !!process.env.REDMINE_API_KEY);
 
-    for (const match of matches) {
+    for (const match of matches) {  
       const issueId = match[1];
       const issue = await getRedmineIssue(issueId, process.env.REDMINE_API_KEY);
 

@@ -23,11 +23,11 @@ async function getRedmineData(issueId, apiKey) {
     return null;
   }
 
-  return data;
+  return data.issue;
 }
 
 module.exports = {
-  events: ["opened", "edited"],
+  events: ["opened", "edited", "synchronize"],
   run: async ({ github, context }) => {
     const pr = context.payload.pull_request;
 
@@ -59,7 +59,7 @@ module.exports = {
         continue;
 
       const tracker = issue.tracker?.name || "Issue";
-      const markdown = `[${tracker} #${issueId}: ${subject}](${link})`;
+      const markdown = `[${tracker} #${issueId}: ${issue.subject}](${link})`;
       linksToAdd.push(markdown);
     }
 

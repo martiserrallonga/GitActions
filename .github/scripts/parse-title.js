@@ -10,8 +10,6 @@ async function getRedmineData(issueId, apiKey) {
     return null;
   }
 
-  console.log("Full response object:", response);
-
   if (!response.ok) {
     console.warn(`Redmine returned ${response.status} for ${issueId}`);
     return null;
@@ -25,6 +23,8 @@ async function getRedmineData(issueId, apiKey) {
     return null;
   }
 
+  console.log("Parsed JSON data:", data);
+  
   return data.issue;
 }
 

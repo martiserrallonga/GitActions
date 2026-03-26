@@ -23,8 +23,6 @@ async function getRedmineData(issueId, apiKey) {
     return null;
   }
 
-  console.log("Parsed JSON data:", data);
-  
   return data.issue;
 }
 
@@ -50,29 +48,14 @@ async function generateRedmineLinks(pr, apiKey) {
     const issueId = match[1];
     const link = `https://redmine.asuni.net/issues/${issueId}`;
 
-    const data = await getRedmineData(issueId, apiKey);
-    if (!data) {
+    const issue = await getRedmineData(issueId, apiKey);
+    if (!issue) {
       console.warn(`No response from Redmine for issue ${issueId}`);
       continue;
     }
 
-    if (data.error) {
-      console.warn(`Redmine error for ${issueId}: ${data.error}`);
-      continue;
-    }
-
-    if (!data.issue) {
-      console.warn(`Unexpected response for ${issueId}`);
-      continue;
-    }
-
-    const issue = data.issue;
     const tracker = issue.tracker?.name || "Issue";
-    let subject = issue.subject;
-    if (!subject) {
-      console.warn(`Issue ${issueId} has no subject`);
-      subject = "No title";
-    }
+    const subject = issue.subject || "No title";
 
     links.push(`- [${tracker} #${issueId}: ${subject}](${link})`);
   }

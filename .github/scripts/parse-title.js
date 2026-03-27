@@ -26,53 +26,68 @@ async function getRedmineData(issueId, apiKey) {
   return data.issue;
 }
 
+async function generateRedmineLinks(pr, apiKey) {
+  const matches = [...pr.title.matchAll(/\[(\d+)\]/g)];
+
+  const body = pr.body || "";
+  const cleanBody = body.replace(/## Links[\s\S]*$/g, "").trim();
+
+  if (matches.length === 0) {
+    console.log("No Redmine issue IDs found in PR title");
+    return cleanBody;
+  }
+
+  if (!apiKey) {
+    console.error("Missing REDMINE_API_KEY → cannot fetch Redmine data");
+    return cleanBody;
+  }
+
+  const links = [];
+
+  for (const match of matches) {
+    const issueId = match[1];
+    const link = `https://redmine.asuni.net/issues/${issueId}`;
+
+    const issue = await getRedmineData(issueId, apiKey);
+    if (!issue) {
+      console.warn(`No response from Redmine for issue ${issueId}`);
+      continue;
+    }
+
+    const tracker = issue.tracker?.name || "Issue";
+    const subject = issue.subject || "No title";
+
+    links.push(`- [${tracker} #${issueId}: ${subject}](${link})`);
+  }
+
+  if (links.length === 0) {
+    console.log("No valid Redmine links could be generated");
+    return cleanBody;
+  }
+
+  const section = `\n\n## Links\n${links.join("\n")}`;
+  return cleanBody + section;
+}
+
 module.exports = {
   events: ["opened", "edited"],
   run: async ({ github, context }) => {
     const pr = context.payload.pull_request;
 
     if (context.payload.action === "edited" && 
-      !context.payload.changes?.title)
-    {
+        !context.payload.changes?.title) {
       console.log("Title has not changed. Exiting");
       return;
     }
 
-    const matches = [...pr.title.matchAll(/\[(\d+)\]/g)];
-    if (matches.length === 0)
-      return;
-
-    let body = pr.body || "";
-    let linksToAdd = [];
-
-    console.log("API KEY exists:", !!process.env.REDMINE_API_KEY);
-
-    for (const match of matches) {  
-      const issueId = match[1];
-      
-      const link = `https://redmine.asuni.net/issues/${issueId}`;
-      if (body.includes(link))
-        continue;
-
-      const issue = await getRedmineData(issueId, process.env.REDMINE_API_KEY);
-      if (!issue)
-        continue;
-
-      const tracker = issue.tracker?.name || "Issue";
-      const markdown = `[${tracker} #${issueId}: ${issue.subject}](${link})`;
-      linksToAdd.push(markdown);
-    }
-
-    if (linksToAdd.length === 0)
-      return;
-
-    body = `${body}\n\n${linksToAdd.join("\n")}`;
+    const apiKey = process.env.REDMINE_API_KEY;
+    const newBody = await generateRedmineLinks(pr, apiKey);
 
     await github.rest.pulls.update({
       owner: context.repo.owner,
       repo: context.repo.repo,
       pull_number: pr.number,
-      body
+      body: newBody
     });
   }
 };

@@ -8,6 +8,3 @@ Inside Pull Requests `Automatically delete head branches Loading` option has bee
 Inside Branches, create a pattern `main`
 Protect matching branches:
 Check option `Require linear history`: Prevent merge commits from being pushed to matching branches.
-
-## Tests
-This is just a test to open a new Pull Request

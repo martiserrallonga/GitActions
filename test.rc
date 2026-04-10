@@ -1,4 +1,354 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+VAUIGH_WIZARD DIALOGEX 0, 0, 465, 268
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wizard"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_CAPTION,0,0,465,33
+    LTEXT           "",IDC_PREVIEW,5,38,200,200,SS_NOTIFY | SS_SUNKEN
+    LTEXT           "",IDC_FORM,210,38,250,200,NOT WS_VISIBLE | WS_TABSTOP
+    CONTROL         "",IDC_STATIC_UP,"Static",SS_BLACKFRAME | SS_SUNKEN,0,33,465,1
+    CONTROL         "",IDC_STATIC_DOWN,"Static",SS_BLACKFRAME | SS_SUNKEN,0,243,465,1
+    PUSHBUTTON      "< Back",IDC_BACK,301,248,51,15
+    DEFPUSHBUTTON   "Next >",IDC_NEXT,353,248,51,15
+    PUSHBUTTON      "Cancel",IDCANCEL,410,248,51,15
+END
+
+VAUIGH_STYLE_WIZARD_FILE DIALOGEX 0, 0, 250, 200
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Welcome to the Grasshopper style wizard. This wizard will guide you through a series of steps to create or edit a Grasshopper style.",IDC_STATIC,0,10,250,32
+    LTEXT           "Definition file:",IDC_STATIC,0,52,250,13
+    COMBOBOX        IDC_COMBO1,10,66,230,30,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Browse...",IDC_BROWSE_BUTTON,190,84,50,14
+    PUSHBUTTON      "Reload",IDC_RELOAD_BUTTON,138,84,50,14,NOT WS_VISIBLE
+END
+
+VAUIGH_STYLE_WIZARD_NAME DIALOGEX 0, 0, 250, 200
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Specify style name:",IDC_STATIC,0,2,250,13
+    EDITTEXT        IDC_NAME,10,15,230,12,ES_AUTOHSCROLL
+    LTEXT           "Definition units",IDC_STATIC,0,34,250,13
+    COMBOBOX        IDC_COMBO1,10,47,230,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Custom units",IDC_STATIC,0,68,250,13
+    EDITTEXT        IDC_NAME2,128,81,112,12,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC5,10,82,116,13
+    LTEXT           "Units per meter:",IDC_STATIC6,10,97,116,13
+    EDITTEXT        IDC_NAME3,128,95,112,12,ES_AUTOHSCROLL
+    LTEXT           "",IDC_FORM,0,120,250,76,NOT WS_VISIBLE
+END
+
+VAUIGH_STYLE_WIZARD_PROPERTIES DIALOGEX 0, 0, 250, 60
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Linked properties:",IDC_STATIC1,0,0,250,12
+    LTEXT           "Path curve:",IDC_STATIC2,8,16,80,10
+    COMBOBOX        IDC_COMBO1,96,16,148,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Height:",IDC_STATIC4,8,32,80,10
+    COMBOBOX        IDC_COMBO2,96,32,148,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+VAUIGH_STYLE_WIZARD_OUTPUT DIALOGEX 0, 0, 250, 200
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,0,250,200
+END
+
+VAUIGH_STYLE_WIZARD_INPUT DIALOGEX 0, 0, 200, 160
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,16,250,96
+    LTEXT           "Filter by group",IDC_STATIC4,92,0,43,10
+    COMBOBOX        IDC_COMBO1,140,0,110,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_STATIC1,0,168,250,26
+    LTEXT           "Input",IDC_STATIC5,0,0,43,10
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,136,250,52
+    LTEXT           "Output",IDC_STATIC7,0,120,43,10
+    LTEXT           "Filter by group",IDC_STATIC6,92,120,43,10
+    COMBOBOX        IDC_COMBO2,140,120,110,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+VAUIGH_STYLE_WIZARD_BIND DIALOGEX 0, 0, 250, 200
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_TREE1,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,0,0,120,200
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,125,0,124,200
+    LTEXT           "No parameters available.",IDC_STATIC4,125,0,125,150
+END
+
+VAUIGH_EDIT_BOOL DIALOGEX 0, 0, 80, 13
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO1,1,0,74,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+VAUIGH_EDIT_LENGTH DIALOGEX 0, 0, 229, 51
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    RTEXT           "---",IDC_STATIC3,157,7,56,8
+    EDITTEXT        IDC_EDIT1,84,4,48,14,ES_AUTOHSCROLL
+    LTEXT           "---",IDC_STATIC2,11,7,56,8
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,0,19,219,18
+END
+
+VAUIGH_EDIT_CURVE DIALOGEX 0, 0, 53, 19
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Pick curve",IDC_BUTTON1,2,3,50,14
+END
+
+VAUIGH_EDIT_BREP DIALOGEX 0, 0, 53, 19
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Pick brep",IDC_BUTTON1,2,3,50,14
+END
+
+VAUIGH_EDIT_V3D DIALOGEX 0, 0, 55, 66
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT1,3,1,48,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,3,16,48,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,3,31,48,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Pick...",IDC_BUTTON1,3,47,50,14
+END
+
+VAUIGH_EDIT_NUMBER DIALOGEX 0, 0, 71, 18
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT1,9,3,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,0,0,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,19,0,52,14,ES_AUTOHSCROLL
+END
+
+VAUIGH_EDIT_STRING DIALOGEX 0, 0, 71, 18
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT1,9,3,52,14,ES_AUTOHSCROLL
+END
+
+VAUIGH_EDIT_ENUM DIALOGEX 0, 0, 71, 18
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO1,3,2,62,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+VAUIGH_HOST_TYPES_DIALOG DIALOGEX 0, 0, 235, 84
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "こんにちは世界",IDC_SEPARATOR,5,5,229,10
     LISTBOX         IDC_HOST_LIST,7,17,150,50,LBS_SORT | LBS_MULTIPLESEL | LBS_HASSTRINGS | LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    VAUIGH_WIZARD, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_STYLE_WIZARD_FILE, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_STYLE_WIZARD_NAME, DIALOG
+    BEGIN
+        RIGHTMARGIN, 213
+    END
+
+    VAUIGH_STYLE_WIZARD_PROPERTIES, DIALOG
+    BEGIN
+        RIGHTMARGIN, 194
+    END
+
+    VAUIGH_STYLE_WIZARD_OUTPUT, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_STYLE_WIZARD_INPUT, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_STYLE_WIZARD_BIND, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_EDIT_BOOL, DIALOG
+    BEGIN
+        RIGHTMARGIN, 75
+        BOTTOMMARGIN, 12
+    END
+
+    VAUIGH_EDIT_LENGTH, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_EDIT_CURVE, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_EDIT_BREP, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_EDIT_V3D, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 61
+    END
+
+    VAUIGH_EDIT_NUMBER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 55
+    END
+
+    VAUIGH_EDIT_STRING, DIALOG
+    BEGIN
+        RIGHTMARGIN, 55
+    END
+
+    VAUIGH_EDIT_ENUM, DIALOG
+    BEGIN
+    END
+
+    VAUIGH_HOST_TYPES_DIALOG, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+VAUIGH_STYLE_WIZARD_INPUT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+VAUIGH_STYLE_WIZARD_FILE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+VAUIGH_STYLE_WIZARD_PROPERTIES AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+VAUIGH_STYLE_WIZARD_NAME AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+VAUIGH_HOST_TYPES_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish (Spain, International Sort) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_GH_STYLE_ICON       ICON                    "res\\iconghstyle.ico"
+
+#endif    // Spanish (Spain, International Sort) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

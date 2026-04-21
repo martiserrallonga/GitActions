@@ -54,7 +54,7 @@ async function generateRedmineLinks(pr, apiKey) {
       continue;
     }
 
-    const project = issue.projuect.name || "No project";
+    const project = issue.project.name || "No project";
     const tracker = issue.tracker?.name || "Issue";
     const subject = issue.subject || "No title";
 

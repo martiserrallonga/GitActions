@@ -27,7 +27,7 @@ async function getRedmineData(issueId, apiKey) {
 }
 
 async function generateRedmineLinks(pr, apiKey) {
-  const matches = [...pr.title.matchAll(/\[(\d+)\]/g)];
+  const matches = [...pr.title.matchAll(/\b(tb|va|la)-(\d+)\b/g)];
 
   const body = pr.body || "";
   const cleanBody = body.replace(/## Links[\s\S]*$/g, "").trim();
@@ -45,7 +45,7 @@ async function generateRedmineLinks(pr, apiKey) {
   const links = [];
 
   for (const match of matches) {
-    const issueId = match[1];
+    const issueId = match[2];
     const link = `https://redmine.asuni.net/issues/${issueId}`;
 
     const issue = await getRedmineData(issueId, apiKey);
@@ -54,10 +54,11 @@ async function generateRedmineLinks(pr, apiKey) {
       continue;
     }
 
+    const project = issue.project.name || "No project";
     const tracker = issue.tracker?.name || "Issue";
     const subject = issue.subject || "No title";
 
-    links.push(`- [${tracker} #${issueId}: ${subject}](${link})`);
+    links.push(`- [${tracker} #${issueId}: ${subject} - ${project}](${link})`);
   }
 
   if (links.length === 0) {

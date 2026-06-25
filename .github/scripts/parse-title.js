@@ -70,6 +70,36 @@ async function generateRedmineLinks(pr, apiKey) {
   return cleanBody + section;
 }
 
+async function updateRedmineIssue(issueId, prUrl, apiKey) {
+  const url = `https://redmine.asuni.net/issues/${issueId}.json`;
+  let response;
+
+  try {
+    response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "X-Redmine-API-Key": apiKey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        issue: {
+          notes: `Related PR: ${prUrl}`
+        }
+      })
+    });
+  } catch (err) {
+    console.error(`Network error updating Redmine issue ${issueId}:`, err);
+    return;
+  }
+
+  if (!response.ok) {
+    console.warn(`Redmine returned ${response.status} when updating issue ${issueId}`);
+    return;
+  }
+
+  console.log(`Redmine issue ${issueId} updated with PR link`);
+}
+
 module.exports = {
   events: ["opened", "edited"],
   run: async ({ github, context }) => {
@@ -83,6 +113,13 @@ module.exports = {
 
     const apiKey = process.env.REDMINE_API_KEY;
     const newBody = await generateRedmineLinks(pr, apiKey);
+
+    if (apiKey) {
+      const matches = [...pr.title.matchAll(/\b(tb|va|la)-(\d+)\b/gi)];
+      for (const match of matches) {
+        await updateRedmineIssue(match[2], pr.html_url, apiKey);
+      }
+    }
 
     await github.rest.pulls.update({
       owner: context.repo.owner,

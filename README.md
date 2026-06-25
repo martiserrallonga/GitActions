@@ -11,3 +11,4 @@ Check option `Require linear history`: Prevent merge commits from being pushed t
 
 ## Tests
 This is just a test to open a new Pull Request
+This is just a test to open a new Pull Request

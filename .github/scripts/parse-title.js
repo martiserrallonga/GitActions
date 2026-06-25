@@ -27,7 +27,7 @@ async function getRedmineData(issueId, apiKey) {
 }
 
 async function generateRedmineLinks(pr, apiKey) {
-  const matches = [...pr.title.matchAll(/\b(tb|va|la)-(\d+)\b/g)];
+  const matches = [...pr.title.matchAll(/\b(tb|va|la)-(\d+)\b/gi)];
 
   const body = pr.body || "";
   const cleanBody = body.replace(/## Links[\s\S]*$/g, "").trim();
@@ -38,7 +38,7 @@ async function generateRedmineLinks(pr, apiKey) {
   }
 
   if (!apiKey) {
-    console.error("Missing REDMINE_API_KEY → cannot fetch Redmine data");
+    console.warn("Missing REDMINE_API_KEY → cannot fetch Redmine data");
     return cleanBody;
   }
 
@@ -62,7 +62,7 @@ async function generateRedmineLinks(pr, apiKey) {
   }
 
   if (links.length === 0) {
-    console.log("No valid Redmine links could be generated");
+    console.warn("No valid Redmine links could be generated");
     return cleanBody;
   }
 

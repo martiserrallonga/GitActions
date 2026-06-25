@@ -1,7 +1,9 @@
+const REDMINE_BASE_URL = "https://redmine.asuni.net";
+
 async function getRedmineData(issueId, apiKey) {
   let response;
   try {
-    const url = `https://redmine.asuni.net/issues/${issueId}.json`;
+    const url = `${REDMINE_BASE_URL}/issues/${issueId}.json`;
     response = await fetch(url, {
       headers: { "X-Redmine-API-Key": apiKey }
     });
@@ -46,7 +48,7 @@ async function generateRedmineLinks(pr, apiKey) {
 
   for (const match of matches) {
     const issueId = match[2];
-    const link = `https://redmine.asuni.net/issues/${issueId}`;
+    const link = `${REDMINE_BASE_URL}/issues/${issueId}`;
 
     const issue = await getRedmineData(issueId, apiKey);
     if (!issue) {
@@ -71,7 +73,7 @@ async function generateRedmineLinks(pr, apiKey) {
 }
 
 async function updateRedmineIssue(issueId, prUrl, apiKey) {
-  const url = `https://redmine.asuni.net/issues/${issueId}.json`;
+  const url = `${REDMINE_BASE_URL}/issues/${issueId}.json`;
   let response;
 
   try {
